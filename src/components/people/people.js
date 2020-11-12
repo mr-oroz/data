@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
-import Item from "./item/item";
+import Item from "./item/index";
 import {getPeople} from "../../action";
 import {Row} from "react-bootstrap";
 import {connect} from "react-redux";
+
 
 
 class People extends Component {

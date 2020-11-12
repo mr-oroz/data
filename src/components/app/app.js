@@ -21,7 +21,7 @@ class App extends Component {
                         <Provider store={store}>
                             <Header/>
                             <People/>
-                            <Route exact path="/people/:id">
+                            <Route exact path="/people/">
                                 <PeopleDetail/>
                             </Route>
                         </Provider>
