@@ -10,10 +10,10 @@ const listItem = (state = initialState, action) => {
         }
 
         case "ADD_PEOPLE": {
-            return {data: action.payload}
+            return {data: action.payload, loading: false}
         }
         default: {
-          return state
+            return state
         }
     }
 }

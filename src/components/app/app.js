@@ -7,29 +7,48 @@ import {
 } from "react-router-dom";
 import Header from "../header/header";
 import People from "../people/people";
-import {Provider} from "react-redux";
-import store from "../../store";
 import PeopleDetail from "../people-detail/people-detail";
 import {Container} from "react-bootstrap";
+import {getPeople} from "../../action";
+import {connect} from "react-redux";
 
 class App extends Component {
+    componentDidMount() {
+        this.props.getPeople()
+    }
+
     render() {
+        const {data, loading} = this.props
+        if (loading) {
+            return <p>loading</p>
+        }
+
         return (
-            <Router>
-                <Switch>
-                    <Container>
-                        <Provider store={store}>
-                            <Header/>
-                            <People/>
-                            <Route exact path="/people/">
-                                <PeopleDetail/>
-                            </Route>
-                        </Provider>
-                    </Container>
-                </Switch>
-            </Router>
+            <Container>
+                <Router>
+                    <Header/>
+                    <Switch>
+                        <Route exact path={"/people"}>
+                            <People data={data}/>
+                        </Route>
+                        <Route exact path="/people/:id">
+                            <PeopleDetail data={data}/>
+                        </Route>
+                    </Switch>
+                </Router>
+            </Container>
         );
     }
 }
 
-export default App;
+const mapStateToProps = ({data, loading}) => {
+    return {data, loading}
+}
+
+const mapActionsToProps = (dispatch) => {
+    return {
+        getPeople: getPeople(dispatch),
+    }
+}
+
+export default connect(mapStateToProps, mapActionsToProps)(App);

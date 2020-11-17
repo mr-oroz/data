@@ -3,7 +3,6 @@ import {ListGroup} from "react-bootstrap";
 import {Link} from "react-router-dom";
 
 
-
 class Item extends Component {
     render() {
         const {name, height, mass, id, hair_color, gender} = this.props
